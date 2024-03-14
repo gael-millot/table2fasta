@@ -36,7 +36,7 @@
 | :--- | :--- |
 | **xlsx2fasta.R** | File to run. |
 
-Dataset and results are available at https://zenodo.org/records/10814482.
+Dataset and results are available at https://zenodo.org/records/10819008.
 
 <br /><br />
 ## INPUT
@@ -53,7 +53,7 @@ Description of the dataset available in Zenodo:
 
 | File | Description |
 | :--- | :--- |
-| **ig_sequences.xlsx** | .xlsx file used by default in the *xlsx2fasta.R* file (in the *Parameters that need to be set by the user* section). Click [here](https://zenodo.org/records/10814482/files/ig_sequences.xlsx) to download and see it. |
+| **ig_sequences.xlsx** | .xlsx file used by default in the *xlsx2fasta.R* file (in the *Parameters that need to be set by the user* section). Click [here](https://zenodo.org/records/10819008/files/ig_sequences.xlsx) to download and see it. |
 
 
 <br /><br />
@@ -86,7 +86,7 @@ Installation of:<br />
 | | Additional folders are present if the `categ` parameter setting has been filled. |
 
 
-Click [here](https://zenodo.org/records/10814482/files/example_of_results.zip) to get examples of results, obtained with the dataset from the [Input](#input) section. The *xlsx2fasta_1710428507* folder results from the `file.kind` parameter set to `"single"`, and *xlsx2fasta_1710428518* from  `file.kind` set to `"multi"`
+Click [here](https://zenodo.org/records/10819008/files/example_of_results.zip) to get examples of results, obtained with the dataset from the [Input](#input) section. The *xlsx2fasta_1710428507* folder results from the `file.kind` parameter set to `"single"`, and *xlsx2fasta_1710428518* from  `file.kind` set to `"multi"`
 
 <br /><br />
 ## VERSIONS
@@ -131,9 +131,14 @@ The developers & maintainers of the mentioned softwares and packages, including:
 ## WHAT'S NEW IN
 
 
+### v1.1
+
+README file improved
+
+
 ### v1.0
 
-everything
+Everything
 
 
 
