@@ -1,6 +1,6 @@
 
 | Usage | Requirement |
-| --- | --- |
+| :--- | :--- |
 | [![R](https://img.shields.io/badge/code-R-blue?style=plastic)](https://cran.r-project.org/) | [![Dependencies: R Version](https://img.shields.io/badge/R-v4.3.1-blue?style=plastic)](https://cran.r-project.org/bin/) |
 | [![License: GPL-3.0](https://img.shields.io/badge/licence-GPL%20(%3E%3D3)-green?style=plastic)](https://www.gnu.org/licenses) | |
 
@@ -32,26 +32,25 @@
 ## CONTENT
 
 | File | Description |
-| --- | --- |
+| :--- | :--- |
 | **xlsx2fasta.R** | File to run. |
 
+Dataset and results are available at https://zenodo.org/records/10814482.
 
 <br /><br />
 ## INPUT
 
 | Required files |
-| --- |
+| :--- |
 | A .xlsx file that must contain:<br /><ul><li>A "name" column.<br /></li><li>One or several "sequences" columns.<br /></li><li>One or several "categorical" columns (optional). |
 
 <br />
 
-The dataset used as example in the *xlsx2fasta.R* file (in the *Parameters that need to be set by the user* section) is available at https://zenodo.org/records/10814482.
-
+Description of the dataset available in Zenodo:
 <br />
-
-| File name | Description |
-| --- | --- |
-| **ig_sequences.xlsx** | .xlsx file. Available [here](https://zenodo.org/records/10814482/files/ig_sequences.xlsx). |
+| File | Description |
+| :--- | :--- |
+| **ig_sequences.xlsx** | .xlsx file used by default in the *xlsx2fasta.R* file (in the *Parameters that need to be set by the user* section). Click [here](https://zenodo.org/records/10814482/files/ig_sequences.xlsx) to download and see it. |
 
 
 <br /><br />
@@ -65,7 +64,7 @@ Installation of:<br />
 
 ### 2. Local running (personal computer)
 
-- Download the *xlsx2fasta.R* file ([here](https://raw.githubusercontent.com/gael-millot/xlsx2fasta/master/xlsx2fasta.R) for the last version. Otherwise, check the previous versions [here](https://github.com/gael-millot/xlsx2fasta/tags).
+- Download the *xlsx2fasta.R* file ([here](https://github.com/gael-millot/xlsx2fasta/archive/refs/heads/master.zip) for the last version. Otherwise, check the previous versions [here](https://github.com/gael-millot/xlsx2fasta/tags)).
 - Open it.
 - Complete the *Parameters that need to be set by the user* section.
 - Save the modifications.
@@ -76,15 +75,14 @@ Installation of:<br />
 <br /><br />
 ## OUTPUT
 
-
-Examples of results, obtained with the dataset from the [Input](#input) section, are available at this address: https://zenodo.org/records/10814482/files/example_of_results.zip. The *xlsx2fasta_1710428507* folder results from the `file.kind` parameter set to `"single"`, and *xlsx2fasta_1710428518* from  `file.kind` set to `"multi"`
-<br /><br />
 | xlsx2fasta_<UNIQUE_ID> folder | Description |
-| --- | --- |
+| :--- | :--- |
 | **xlsx2fasta.log** | Log file, notably indicating the parameter settings used. |
 | **All** | Folder containing the fasta files of all the sequences present in the .xlsx file. The number of fasta files varies according to the setting of the `Seq` and `file.kind` parameters. |
 | | Additional folders are present if the `categ` parameter setting has been filled. |
 
+
+Click [here](https://zenodo.org/records/10814482/files/example_of_results.zip) to get examples of results, obtained with the dataset from the [Input](#input) section. The *xlsx2fasta_1710428507* folder results from the `file.kind` parameter set to `"single"`, and *xlsx2fasta_1710428518* from  `file.kind` set to `"multi"`
 
 <br /><br />
 ## VERSIONS
