@@ -1,8 +1,8 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-        .custom-table {
+    <style> .custom-table {
             width: 100%;
             border-collapse: collapse;
         }
@@ -20,8 +20,7 @@
         }
         .custom-table tr:hover {
             background-color: #eaeaea; /* Hover effect for table row */
-        }
-    </style>
+        } </style>
 </head>
 <body>
 
