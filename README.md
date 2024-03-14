@@ -1,137 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .custom-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .custom-table th, .custom-table td {
+            border: 1px solid #ddd; /* Light grey border */
+            padding: 8px; /* Padding for content */
+            text-align: left; /* Align text to the left */
+        }
+        .custom-table th {
+            background-color: #000; /* Black background */
+            color: #fff; /* White text */
+        }
+        .custom-table tr:nth-child(even) {
+            background-color: #f9f9f9; /* Zebra striping for even rows */
+        }
+        .custom-table tr:hover {
+            background-color: #eaeaea; /* Hover effect for table row */
+        }
+    </style>
+</head>
+<body>
 
-| Usage | Requirement |
-| --- | --- |
-| [![R](https://img.shields.io/badge/code-R-blue?style=plastic)](https://cran.r-project.org/) | [![Dependencies: R Version](https://img.shields.io/badge/R-v4.3.1-blue?style=plastic)](https://cran.r-project.org/bin/) |
-| [![License: GPL-3.0](https://img.shields.io/badge/licence-GPL%20(%3E%3D3)-green?style=plastic)](https://www.gnu.org/licenses) | |
+<table class="custom-table">
+    <thead>
+        <tr>
+            <th>Header 1</th>
+            <th>Header 2</th>
+            <th>Header 3</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Data 1</td>
+            <td>Data 2</td>
+            <td>Data 3</td>
+        </tr>
+        <tr>
+            <td>Data 4</td>
+            <td>Data 5</td>
+            <td>Data 6</td>
+        </tr>
+        <!-- Add more rows as needed -->
+    </tbody>
+</table>
 
-<br /><br />
-## TABLE OF CONTENTS
-
-   - [AIM](#aim)
-   - [CONTENT](#content)
-   - [INPUT](#input)
-   - [HOW TO RUN](#how-to-run)
-   - [OUTPUT](#output)
-   - [VERSIONS](#versions)
-   - [LICENCE](#licence)
-   - [CITATION](#citation)
-   - [CREDITS](#credits)
-   - [ACKNOWLEDGEMENTS](#Acknowledgements)
-   - [WHAT'S NEW IN](#what's-new-in)
-
-<br /><br />
-## AIM
-
-- Create fasta files from nucleotide or amino acid sequences present in a .xlsx file.
-- Return "single" (each sequence in a different fasta file) or "multi" (all the sequences in a single fasta file) fasta files.
-- Return all the sequences of the input .xlsx file into a single "All" folder.
-- Fasta files can also be gathered in additional folders according to categorical informations present in the .xlsx file.
-
-
-<br /><br />
-## CONTENT
-
-| File | Description |
-| --- | --- |
-| **xlsx2fasta.R** | File to run. |
-
-
-<br /><br />
-## INPUT
-
-| Required files |
-| --- |
-| A .xlsx file that must contain:<br /><ul><li>A "name" column.<br /></li><li>One or several "sequences" columns.<br /></li><li>One or several "categorical" columns (optional). |
-
-<br />
-
-The dataset used as example in the *xlsx2fasta.R* file (in the *Parameters that need to be set by the user* section) is available at https://zenodo.org/records/10814482.
-
-<br />
-
-| File name | Description |
-| --- | --- |
-| **ig_sequences.xlsx** | .xlsx file. Available [here](https://zenodo.org/records/10814482/files/ig_sequences.xlsx). |
-
-
-<br /><br />
-## HOW TO RUN
-
-### 1. Prerequisite
-
-Installation of:<br />
-[R](https://pbil.univ-lyon1.fr/CRAN/)<br />
-
-
-### 2. Local running (personal computer)
-
-- Download the *xlsx2fasta.R* file ([here](https://raw.githubusercontent.com/gael-millot/xlsx2fasta/master/xlsx2fasta.R) for the last version. Otherwise, check the previous versions [here](https://github.com/gael-millot/xlsx2fasta/tags).
-- Open it.
-- Complete the "Parameters that need to be set by the user" section.
-- Save the modifications.
-- Open a R session.
-- Source the *xlsx2fasta.R* file to run it. Example: `source("C:/Users/gmillot/Desktop/xlsx2fasta.R")`
-
-
-<br /><br />
-## OUTPUT
-
-
-Examples of results, obtained with the dataset from the [Input](#input) section, are available at this address: https://zenodo.org/records/10814482/files/example_of_results.zip. The *xlsx2fasta_1710428507* folder results from the `file.kind` parameter set to `"single"`, and *xlsx2fasta_1710428518* from  `file.kind` set to `"multi"`
-<br /><br />
-| xlsx2fasta_<UNIQUE_ID> folder | Description |
-| --- | --- |
-| **xlsx2fasta.log** | Log file, notably indicating the parameter settings used. |
-| **All** | Folder containing the fasta files of all the sequences present in the .xlsx file. The number of fasta files varies according to the setting of the `Seq` and `file.kind` parameters. |
-| | Additional folders are present if the `categ` parameter setting has been filled. |
-
-
-<br /><br />
-## VERSIONS
-
-
-The different releases are tagged [here](https://github.com/gael-millot/xlsx2fasta/tags)
-
-<br /><br />
-## LICENCE
-
-
-This package of scripts can be redistributed and/or modified under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
-Distributed in the hope that it will be useful, but without any warranty; without even the implied warranty of merchandability or fitness for a particular purpose.
-See the GNU General Public License for more details at https://www.gnu.org/licenses.
-
-<br /><br />
-## CITATION
-
-
-Not yet published
-
-
-<br /><br />
-## CREDITS
-
-
-[Gael A. Millot](https://github.com/gael-millot), Hub, Institut Pasteur, Paris, France
-
-<br /><br />
-## ACKNOWLEDGEMENTS
-
-
-The developers & maintainers of the mentioned softwares and packages, including:
-
-- [R](https://www.r-project.org/)
-- [Git](https://git-scm.com/)
-- [Github](https://github.com/)
-- [Gitlab](https://about.gitlab.com/)
-
-
-<br /><br />
-## WHAT'S NEW IN
-
-
-### v1.0
-
-everything
-
-
-
+</body>
+</html>
