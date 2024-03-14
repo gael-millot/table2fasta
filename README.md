@@ -39,7 +39,7 @@ Dataset and results are available at https://zenodo.org/records/10814482.
 
 <br /><br />
 ## INPUT
-
+<br />
 | Required files |
 | :--- |
 | A .xlsx file that must contain:<br /><ul><li>A "name" column.<br /></li><li>One or several "sequences" columns.<br /></li><li>One or several "categorical" columns (optional). |
@@ -74,7 +74,7 @@ Installation of:<br />
 
 <br /><br />
 ## OUTPUT
-
+<br />
 | xlsx2fasta_<UNIQUE_ID> folder | Description |
 | :--- | :--- |
 | **xlsx2fasta.log** | Log file, notably indicating the parameter settings used. |
