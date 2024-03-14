@@ -30,6 +30,7 @@
 
 <br /><br />
 ## CONTENT
+<br />
 
 | File | Description |
 | :--- | :--- |
@@ -40,6 +41,7 @@ Dataset and results are available at https://zenodo.org/records/10814482.
 <br /><br />
 ## INPUT
 <br />
+
 | Required files |
 | :--- |
 | A .xlsx file that must contain:<br /><ul><li>A "name" column.<br /></li><li>One or several "sequences" columns.<br /></li><li>One or several "categorical" columns (optional). |
@@ -48,6 +50,7 @@ Dataset and results are available at https://zenodo.org/records/10814482.
 
 Description of the dataset available in Zenodo:
 <br />
+
 | File | Description |
 | :--- | :--- |
 | **ig_sequences.xlsx** | .xlsx file used by default in the *xlsx2fasta.R* file (in the *Parameters that need to be set by the user* section). Click [here](https://zenodo.org/records/10814482/files/ig_sequences.xlsx) to download and see it. |
@@ -75,6 +78,7 @@ Installation of:<br />
 <br /><br />
 ## OUTPUT
 <br />
+
 | xlsx2fasta_<UNIQUE_ID> folder | Description |
 | :--- | :--- |
 | **xlsx2fasta.log** | Log file, notably indicating the parameter settings used. |
