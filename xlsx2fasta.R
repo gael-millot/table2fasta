@@ -65,7 +65,7 @@ log <- "xlsx2fasta.log" # single character string indicating the name of the log
 #########################################################################
 
 
-path <- "https://zenodo.org/records/10814482/files/ig_sequences.xlsx" # single character string indicating the full path of the xlsx file. Example: path <- "C:/Users/gmillot/Documents/Git_projects/repertoire_profiler/dataset/xlsx2fasta_test_2/ig_sequences.xlsx"
+path <- "https://zenodo.org/records/10819008/files/ig_sequences.xlsx" # single character string indicating the full path of the xlsx file. Example: path <- "C:/Users/gmillot/Documents/Git_projects/repertoire_profiler/dataset/xlsx2fasta_test_2/ig_sequences.xlsx"
 Name <- "Name" # single character string indicating the column name of the sequence names. Example: Name <- "Name"
 Seq <- c("VH", "VL") # vector of character strings indicating the column names of the xlsx file containing sequences. Example: Seq <- c("VH", "VL")
 categ <- c("Patient", "Sample") # vector of character strings indicating additional names of qualitative columns of the xlsx file. A specific folder will be generated for each class of each of these columns, with the fasta sequence in it when non NA or empty cells are present in this column. Write "NULL" if not required. Example: categ <- c("Patient", "Sample")
