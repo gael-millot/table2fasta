@@ -65,7 +65,7 @@ log <- "xlsx2fasta.log" # single character string indicating the name of the log
 #########################################################################
 
 
-path <- "https://zenodo.org/records/10819008/files/ig_sequences.xlsx" # single character string indicating the full path of the xlsx file. Example: path <- "C:/Users/gmillot/Documents/Git_projects/repertoire_profiler/dataset/xlsx2fasta_test_2/ig_sequences.xlsx"
+path <- "https://zenodo.org/records/10844886/files/ig_sequences.xlsx" # single character string indicating the full path of the xlsx file. Example: path <- "C:/Users/gmillot/Documents/Git_projects/repertoire_profiler/dataset/xlsx2fasta_test_2/ig_sequences.xlsx"
 Name <- "Name" # single character string indicating the column name of the sequence names. Example: Name <- "Name"
 Seq <- c("VH", "VL") # vector of character strings indicating the column names of the xlsx file containing sequences. Example: Seq <- c("VH", "VL")
 categ <- c("Patient", "Sample") # vector of character strings indicating additional names of qualitative columns of the xlsx file. A specific folder will be generated for each class of each of these columns, with the fasta sequence in it when non NA or empty cells are present in this column. Write "NULL" if not required. Example: categ <- c("Patient", "Sample")
@@ -263,13 +263,6 @@ fun_pack(req.package = req.package.list, load = TRUE, lib.path = NULL) # package
 
 ini.date <- Sys.time()
 ini.time <- as.numeric(ini.date) # time of process begin, converted into seconds
-out.path <- paste0(out.path, "/xlsx2fasta_", as.integer(ini.time))
-dir.create(out.path)
-fun_report(data = paste0("\n\n################################################################ ", script, " PROCESS\n\n"), output = log, path = out.path, overwrite = TRUE)
-fun_report(data = paste0("\n\n################################ RUNNING DATE AND STARTING TIME\n\n"), output = log, path = out.path, overwrite = FALSE)
-fun_report(data = paste0(ini.date, "\n\n"), output = log, path = out.path, overwrite = FALSE)
-fun_report(data = paste0("\n\n################################ RUNNING\n\n"), output = log, path = out.path, overwrite = FALSE)
-
 
 ################################ End ignition
 
@@ -358,6 +351,20 @@ if( ! dir.exists(out.path)){
 
 
 ################################ Main code
+
+
+################ Ignition
+
+
+out.path <- paste0(out.path, "/xlsx2fasta_", as.integer(ini.time))
+dir.create(out.path)
+fun_report(data = paste0("\n\n################################################################ ", script, " PROCESS\n\n"), output = log, path = out.path, overwrite = TRUE)
+fun_report(data = paste0("\n\n################################ RUNNING DATE AND STARTING TIME"), output = log, path = out.path, overwrite = FALSE)
+fun_report(data = paste0(ini.date, "\n\n"), output = log, path = out.path, overwrite = FALSE)
+fun_report(data = paste0("\n\n################################ RUNNING"), output = log, path = out.path, overwrite = FALSE)
+
+
+################ End ignition
 
 
 ################ Graphical parameter initialization
@@ -505,6 +512,7 @@ if( ! is.null(categ)){
         }
     }
 }
+fun_report(data = paste0("\n\n################################ RUNNING END"), output = log, path = out.path, overwrite = FALSE)
 
 ############ end main
 
@@ -516,15 +524,6 @@ if( ! is.null(categ)){
 
 
 ################ Environment saving
-
-
-fun_report(data = paste0("\n\n################################ RUNNING END"), output = log, path = out.path, overwrite = FALSE)
-end.date <- Sys.time()
-end.time <- as.numeric(end.date)
-total.lapse <- round(lubridate::seconds_to_period(end.time - ini.time))
-fun_report(data = paste0("\n\nEND TIME: ", end.date), output = log, path = out.path, overwrite = FALSE)
-fun_report(data = paste0("\n\nTOTAL TIME LAPSE: ", total.lapse), output = log, path = out.path, overwrite = FALSE)
-fun_report(data = paste0("\n\nALL DATA SAVED IN all_objects.RData"), output = log, path = out.path, overwrite = FALSE)
 
 
 ################ end Environment saving
@@ -547,14 +546,17 @@ if( ! is.null(warn)){
 ################ Parameter printing
 
 
-fun_report(data = paste0("\n\n################################ INITIAL SETTINGS OF PARAMETERS"), output = log, path = out.path, overwrite = FALSE)
+fun_report(data = paste0("\n\n################################ INITIAL SETTINGS OF PARAMETERS"), output = log, path = out.path, overwrite = FALSE, sep = 1)
 fun_report(data = param.ini.settings, output = log, path = out.path, overwrite = FALSE, , vector.cat = TRUE)
 fun_report(data = paste0("\n\n################################ R SYSTEM AND PACKAGES"), output = log, path = out.path, overwrite = FALSE)
 tempo <- sessionInfo()
 tempo$otherPkgs <- tempo$otherPkgs[order(names(tempo$otherPkgs))] # sort the packages
 tempo$loadedOnly <- tempo$loadedOnly[order(names(tempo$loadedOnly))] # sort the packages
 fun_report(data = tempo, output = log, path = out.path, overwrite = FALSE, , vector.cat = TRUE)
-fun_report(data = paste0("\n\n################################ JOB END\n\nTIME: ", end.date, "\n\nTOTAL TIME LAPSE: ", total.lapse, "\n"), output = log, path = out.path, overwrite = FALSE)
+end.date <- Sys.time()
+end.time <- as.numeric(end.date)
+total.lapse <- round(lubridate::seconds_to_period(end.time - ini.time))
+fun_report(data = paste0("\n\n################################ JOB END\n\n\nTIME: ", end.date, "\n\nTOTAL TIME LAPSE: ", total.lapse, "\n"), output = log, path = out.path, overwrite = FALSE)
 
 
 ################ end Parameter printing
