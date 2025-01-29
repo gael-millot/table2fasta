@@ -413,6 +413,12 @@ if( ! all(Seq %in% names(obs))){
     stop(paste0("\n\n============\n\nERROR IN ", script, ".R\n\nTHE Seq PARAMETER MUST BE COLUMN NAMES OF THE IMPORTED FILE:\n", path, "\n\nHERE IT IS Seq:\n", paste(Seq, collapse = "\n"), "\n\nCOLUMN NAMES:\n", paste(names(obs), collapse = "\n"), "\n\n============\n\n"), call. = FALSE)
 }
 
+if( ! is.null(categ)){
+    if( ! all(categ %in% names(obs))){
+        stop(paste0("\n\n============\n\nERROR IN ", script, ".R\n\nTHE categ PARAMETER MUST BE COLUMN NAMES OF THE IMPORTED FILE:\n", path, "\n\nHERE IT IS categ:\n", paste(categ, collapse = "\n"), "\n\nCOLUMN NAMES:\n", paste(names(obs), collapse = "\n"), "\n\n============\n\n"), call. = FALSE)
+    }
+}
+
 if( ! all(categ %in% names(obs))){
     stop(paste0("\n\n============\n\nERROR IN ", script, ".R\n\nTHE categ PARAMETER MUST BE COLUMN NAMES OF THE IMPORTED FILE:\n", path, "\n\nHERE IT IS categ:\n", paste(categ, collapse = "\n"), "\n\nCOLUMN NAMES:\n", paste(names(obs), collapse = "\n"), "\n\n============\n\n"), call. = FALSE)
 }
@@ -441,12 +447,12 @@ dir.create(path.all)
 for(i0 in Seq){
     tempo.log <- is.na(obs[ , i0]) | obs[ , i0] == ""
     if(any(tempo.log)){
-        tempo.warn <- paste0("IMPORTED FILE:\n", path, "\nHAS ", sum(tempo.log, na.rm = TRUE), " AMONG ", nrow(obs), " EMPTY SEQUENCES IN THE ", i0, " COLUMN IN LINES:\n", paste(which(tempo.log), collapse = "\n"))
+        tempo.warn <- paste0("IMPORTED FILE:\n", path, "\nHAS ", sum(tempo.log, na.rm = TRUE), " AMONG ", nrow(obs), " EMPTY SEQUENCES (NA OR \"\") IN THE ", i0, " COLUMN IN LINES:\n", paste(which(tempo.log), collapse = "\n"))
         cat(paste0("\nWARNING: ", tempo.warn, "\n\n"))
         fun_report(data = paste0("WARNING\n", tempo.warn), output = log, path = out.path, overwrite = FALSE)
         warn <- paste0(ifelse(is.null(warn), tempo.warn, paste0(warn, "\n\n", tempo.warn)))
     }else{
-        tempo.cat <- paste0("\nIMPORTED FILE:\n", path, "\nHAS NO EMPTY SEQUENCES AMONG ", nrow(obs), " IN THE ", i0, " COLUMN\n")
+        tempo.cat <- paste0("\nIMPORTED FILE:\n", path, "\nHAS NO EMPTY SEQUENCES (NA OR \"\") AMONG ", nrow(obs), " IN THE ", i0, " COLUMN\n")
         fun_report(data = tempo.cat, output = log, path = out.path, overwrite = FALSE)
     }
     if(file.kind == "single"){
@@ -464,7 +470,7 @@ for(i0 in Seq){
             cat(tempo.cat, file = paste0(path.all,  "/", tempo.name), append = TRUE)
         }
     }else{
-        tempo.warn <- paste0("EMPTY ", i0, " FOLDER CREATED BECAUSE THE IMPORTED FILE:\n", path, "\nHAS ONLY EMPTY SEQUENCES IN THE ", i0, " COLUMN")
+        tempo.warn <- paste0("EMPTY ", i0, " FOLDER CREATED BECAUSE THE IMPORTED FILE:\n", path, "\nHAS ONLY EMPTY SEQUENCES (NA OR \"\") IN THE ", i0, " COLUMN")
         cat(paste0("\nWARNING: ", tempo.warn, "\n\n"))
         fun_report(data = paste0("WARNING\n", tempo.warn), output = log, path = out.path, overwrite = FALSE)
         warn <- paste0(ifelse(is.null(warn), tempo.warn, paste0(warn, "\n\n", tempo.warn)))
@@ -473,19 +479,24 @@ for(i0 in Seq){
 
 if( ! is.null(categ)){
     for(i1 in categ){ # if several column to use
-        for(i2 in unique(obs[ , i1])){ # names of each patient for instance
+        if(all(is.na(obs[ , i1]))){
+            stop(paste0("\n\n============\n\nERROR IN ", script, ".R\n\nTHE ", i1, " COLUMN NAME IN THE categ PARAMETER CANNOT BE A COLUMN MADE OF NA ONLY.", "\n\n============\n\n"), call. = FALSE)
+        }
+        tempo_names <- as.character(na.omit(unique(obs[ , i1])))
+        for(i2 in tempo_names){ # names of each patient for instance
             tempo.path <- paste0(out.path, "/", i1, "_", i2)
             dir.create(tempo.path)
+            tempo.df <- obs[obs[ , i1] == i2 & ! is.na(obs[ , i1]), ]
+            if(i2 == "IGHD"){print(tempo.df)}
             for(i3 in Seq){
-                tempo.df <- obs[obs[ , i1] == i2, ]
                 tempo.log <- is.na(tempo.df[ , i3]) | tempo.df[ , i3] == ""
                 if(any(tempo.log)){
-                    tempo.warn <- paste0("IMPORTED FILE:\n", path, "\nHAS ", sum(tempo.log, na.rm = TRUE), " AMONG ",  nrow(tempo.df), " EMPTY SEQUENCES IN THE ", i3, " COLUMN OF THE CLASS ", i2, " OF THE CATEG ", i1)
+                    tempo.warn <- paste0("IMPORTED FILE:\n", path, "\nHAS ", sum(tempo.log, na.rm = TRUE), " AMONG ",  nrow(tempo.df), " EMPTY SEQUENCES (NA OR \"\") IN THE ", i3, " COLUMN OF THE CLASS ", i2, " OF THE CATEG ", i1)
                     cat(paste0("\nWARNING: ", tempo.warn, "\n\n"))
                     fun_report(data = paste0("WARNING\n", tempo.warn), output = log, path = out.path, overwrite = FALSE)
                     warn <- paste0(ifelse(is.null(warn), tempo.warn, paste0(warn, "\n\n", tempo.warn)))
                 }else{
-                    tempo.cat <- paste0("\nIMPORTED FILE:\n", path, "\nHAS NO EMPTY SEQUENCES AMONG ", nrow(tempo.df), " IN THE ", i3, " COLUMN OF THE CLASS ", i2, " OF THE CATEG ", i1, "\n")
+                    tempo.cat <- paste0("\nIMPORTED FILE:\n", path, "\nHAS NO EMPTY SEQUENCES (NA OR \"\") AMONG ", nrow(tempo.df), " IN THE ", i3, " COLUMN OF THE CLASS ", i2, " OF THE CATEG ", i1, "\n")
                     fun_report(data = tempo.cat, output = log, path = out.path, overwrite = FALSE)
                 }
                 if(file.kind == "single"){
