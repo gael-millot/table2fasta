@@ -487,7 +487,6 @@ if( ! is.null(categ)){
             tempo.path <- paste0(out.path, "/", i1, "_", i2)
             dir.create(tempo.path)
             tempo.df <- obs[obs[ , i1] == i2 & ! is.na(obs[ , i1]), ]
-            if(i2 == "IGHD"){print(tempo.df)}
             for(i3 in Seq){
                 tempo.log <- is.na(tempo.df[ , i3]) | tempo.df[ , i3] == ""
                 if(any(tempo.log)){

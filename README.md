@@ -132,6 +132,11 @@ The developers & maintainers of the mentioned softwares and packages, including:
 ## WHAT'S NEW IN
 
 
+### v2.1
+
+- A test line removed.
+
+
 ### v2.0
 
 - Problem of NA not removed when categ parameter is used.
