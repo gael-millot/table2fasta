@@ -65,10 +65,10 @@ log <- "table2fasta.log" # single character string indicating the name of the lo
 #########################################################################
 
 
-path <- "https://zenodo.org/records/10844886/files/ig_sequences.xlsx" # single character string indicating the full path of the table file. Example: path <- "C:/Users/gmillot/Documents/Git_projects/repertoire_profiler/dataset/table2fasta_test_2/ig_sequences.xlsx"
+path <- "https://zenodo.org/records/10844886/files/ig_sequences.xlsx" # single character string indicating the full path of the table file. Example: path <- "C:/Users/gmillot/Documents/Git_projects/repertoire_profiler/dataset/table2fasta_test_2/ig_sequences.xlsx". Example: path <- "C:/Users/gmillot/Desktop/metadata.tsv"
 Name <- "Name" # single character string indicating the column name of the sequence names. Example: Name <- "Name"
-Seq <- c("VH", "VL") # vector of character strings indicating the column names of the table file containing sequences. Example: Seq <- c("VH", "VL")
-categ <- c("Patient", "Sample") # vector of character strings indicating additional names of qualitative columns of the table file. A specific folder will be generated for each class of each of these columns, with the fasta sequence in it when non NA or empty cells are present in this column. Write "NULL" if not required. Example: categ <- c("Patient", "Sample")
+Seq <- c("VH", "VL") # vector of character strings indicating the column names of the table file containing sequences. Example: Seq <- c("VH", "VL"). Example: Seq <- c("VH").
+categ <- c("Patient", "Sample") # vector of character strings indicating additional names of qualitative columns of the table file. A specific folder will be generated for each class of each of these columns, with the fasta sequence in it when non NA or empty cells are present in this column. Write "NULL" if not required. Example: categ <- c("Patient", "Sample"). Example: categ <- c("Patient")
 out.path <- "C:/Users/gmillot/Desktop" # single character string indicating the path of the output folder. Example: out.path <- "C:/Users/gmillot/Desktop"
 file.kind <- "multi" # single character string indicating kind of fasta file returned. Either "single" (each sequence in a different fasta file) or "multi" (all the sequences in a single fasta file). file.kind <- "multi"
 
