@@ -22,10 +22,10 @@
 <br /><br />
 ## AIM
 
-- Create fasta files from nucleotide or amino acid sequences present in a .xlsx file.
+- Create fasta files from nucleotide or amino acid sequences present in a table file (.xlsx, .csv, .tsv and .txt).
 - Return "single" (each sequence in a different fasta file) or "multi" (all the sequences in a single fasta file) fasta files.
-- Return all the sequences of the input .xlsx file into a single "All" folder.
-- Fasta files can also be gathered in additional folders according to categorical informations present in the .xlsx file.
+- Return all the sequences of the input file into a single "All" folder.
+- Fasta files can also be gathered in additional folders according to categorical informations present in the table file.
 
 
 <br /><br />
@@ -34,7 +34,7 @@
 
 | File | Description |
 | :--- | :--- |
-| **xlsx2fasta.R** | File to run. |
+| **table2fasta.R** | File to run. |
 | **Licence.txt** | Licence of the release. |
 
 Dataset and results are available at https://zenodo.org/records/10844886.
@@ -45,7 +45,7 @@ Dataset and results are available at https://zenodo.org/records/10844886.
 
 | Required files |
 | :--- |
-| A .xlsx file that must contain:<br /><ul><li>A "name" column.<br /></li><li>One or several "sequences" columns.<br /></li><li>One or several "categorical" columns (optional). |
+| A .xlsx, .csv, .tsv or .txt file that must contain:<br /><ul><li>A "name" column.<br /></li><li>One or several "sequences" columns.<br /></li><li>One or several "categorical" columns (optional). |
 
 <br />
 
@@ -54,7 +54,7 @@ Description of the dataset available in Zenodo:
 
 | File | Description |
 | :--- | :--- |
-| **ig_sequences.xlsx** | .xlsx file used by default in the *xlsx2fasta.R* file (in the *Parameters that need to be set by the user* section). Click [here](https://zenodo.org/records/10844886/files/ig_sequences.xlsx) to download and see it. |
+| **ig_sequences.xlsx** | .xlsx file used by default in the *table2fasta.R* file (in the *Parameters that need to be set by the user* section). Click [here](https://zenodo.org/records/10844886/files/ig_sequences.xlsx) to download and see it. |
 
 
 <br /><br />
@@ -68,32 +68,32 @@ Installation of:<br />
 
 ### 2. Local running (personal computer)
 
-- Download the *xlsx2fasta.R* file ([here](https://github.com/gael-millot/xlsx2fasta/archive/refs/heads/master.zip) for the last version. Otherwise, check the previous versions [here](https://github.com/gael-millot/xlsx2fasta/tags)).
+- Download the *table2fasta.R* file ([here](https://github.com/gael-millot/table2fasta/archive/refs/heads/master.zip) for the last version. Otherwise, check the previous versions [here](https://github.com/gael-millot/table2fasta/tags)).
 - Open it.
 - Complete the *Parameters that need to be set by the user* section.
 - Save the modifications.
 - Open a R session.
-- Source the *xlsx2fasta.R* file to run it. Example: `source("C:/Users/gmillot/Desktop/xlsx2fasta.R")`
+- Source the *table2fasta.R* file to run it. Example: `source("C:/Users/gmillot/Desktop/table2fasta.R")`
 
 
 <br /><br />
 ## OUTPUT
 <br />
 
-| xlsx2fasta_<UNIQUE_ID> folder | Description |
+| table2fasta_<UNIQUE_ID> folder | Description |
 | :--- | :--- |
-| **xlsx2fasta.log** | Log file, notably indicating the parameter settings used. |
-| **All** | Folder containing the fasta files of all the sequences present in the .xlsx file. The number of fasta files varies according to the setting of the `Seq` and `file.kind` parameters. |
+| **table2fasta.log** | Log file, notably indicating the parameter settings used. |
+| **All** | Folder containing the fasta files of all the sequences present in the table file. The number of fasta files varies according to the setting of the `Seq` and `file.kind` parameters. |
 | | Additional folders are present if the `categ` parameter setting has been filled. |
 
 
-Click [here](https://zenodo.org/records/10844886/files/example_of_results.zip) to get examples of results, obtained with the dataset from the [Input](#input) section. The *xlsx2fasta_1710949947* folder results from the `file.kind` parameter set to `"single"`, and *xlsx2fasta_1710949980* from  `file.kind` set to `"multi"`.
+Click [here](https://zenodo.org/records/10844886/files/example_of_results.zip) to get examples of results, obtained with the dataset from the [Input](#input) section. The *table2fasta_1710949947* folder results from the `file.kind` parameter set to `"single"`, and *table2fasta_1710949980* from  `file.kind` set to `"multi"`.
 
 <br /><br />
 ## VERSIONS
 
 
-The different releases are tagged [here](https://github.com/gael-millot/xlsx2fasta/tags).
+The different releases are tagged [here](https://github.com/gael-millot/table2fasta/tags).
 
 <br /><br />
 ## LICENCE
@@ -130,6 +130,10 @@ The developers & maintainers of the mentioned softwares and packages, including:
 
 <br /><br />
 ## WHAT'S NEW IN
+
+### v3.0
+
+- Now accept .txt, .csv and .tsv extension, in addtion to .xlsx.
 
 
 ### v2.1

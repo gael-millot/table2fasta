@@ -2,7 +2,7 @@
 
 #########################################################################
 ##                                                                     ##
-##     xlsx2fasta.R                                                      ##
+##     table2fasta.R                                                   ##
 ##                                                                     ##
 ##     Gael A. Millot                                                  ##
 ##     Bioinformatics and Biostatistics Hub                            ##
@@ -17,7 +17,7 @@
 ################################ Aim
 
 
-# Creates all the fasta files from a .xlsx file.
+# Creates all the fasta files from a table file (.xlsx, .csv, .tsv and .txt).
 
 
 ################################ End Aim
@@ -39,8 +39,8 @@
 
 
 # R version checking
-if(version$version.string != "R version 4.3.1 (2023-06-16 ucrt)"){
-    cat(paste0("\n\nWARNING: THE ", version$version.string, " IS NOT THE 4.3.1 (2023-06-16 ucrt) RECOMMANDED\n\n"))
+if(version$version.string != "R version 4.4.2 (2024-10-31 ucrt)"){
+    cat(paste0("\n\nWARNING: THE ", version$version.string, " IS NOT THE 4.4.2 (2024-10-31 ucrt) RECOMMANDED\n\n"))
 }
 # other initializations
 erase.objects = TRUE # write TRUE to erase all the existing objects in R before starting the algorithm and FALSE otherwise. Beginners should use TRUE
@@ -49,9 +49,9 @@ if(erase.objects == TRUE){
     erase.objects = TRUE
 }
 erase.graphs = TRUE # write TRUE to erase all the graphic windows in R before starting the algorithm and FALSE otherwise
-script <- "xlsx2fasta"
+script <- "table2fasta"
 cute <- "https://gitlab.pasteur.fr/gmillot/cute_little_R_functions/-/raw/v11.4.0/cute_little_R_functions.R" # single character string indicating the path of the cute_little_R_functions.R file required for this script. Example: cute <- "https://gitlab.pasteur.fr/gmillot/cute_little_R_functions/-/raw/v11.4.0/cute_little_R_functions.R"
-log <- "xlsx2fasta.log" # single character string indicating the name of the log file. Example: log <- "xlsx2fasta.log"
+log <- "table2fasta.log" # single character string indicating the name of the log file. Example: log <- "table2fasta.log"
 
 
 ################################ End Initialization
@@ -65,10 +65,10 @@ log <- "xlsx2fasta.log" # single character string indicating the name of the log
 #########################################################################
 
 
-path <- "https://zenodo.org/records/10844886/files/ig_sequences.xlsx" # single character string indicating the full path of the xlsx file. Example: path <- "C:/Users/gmillot/Documents/Git_projects/repertoire_profiler/dataset/xlsx2fasta_test_2/ig_sequences.xlsx"
+path <- "https://zenodo.org/records/10844886/files/ig_sequences.xlsx" # single character string indicating the full path of the table file. Example: path <- "C:/Users/gmillot/Documents/Git_projects/repertoire_profiler/dataset/table2fasta_test_2/ig_sequences.xlsx"
 Name <- "Name" # single character string indicating the column name of the sequence names. Example: Name <- "Name"
-Seq <- c("VH", "VL") # vector of character strings indicating the column names of the xlsx file containing sequences. Example: Seq <- c("VH", "VL")
-categ <- c("Patient", "Sample") # vector of character strings indicating additional names of qualitative columns of the xlsx file. A specific folder will be generated for each class of each of these columns, with the fasta sequence in it when non NA or empty cells are present in this column. Write "NULL" if not required. Example: categ <- c("Patient", "Sample")
+Seq <- c("VH", "VL") # vector of character strings indicating the column names of the table file containing sequences. Example: Seq <- c("VH", "VL")
+categ <- c("Patient", "Sample") # vector of character strings indicating additional names of qualitative columns of the table file. A specific folder will be generated for each class of each of these columns, with the fasta sequence in it when non NA or empty cells are present in this column. Write "NULL" if not required. Example: categ <- c("Patient", "Sample")
 out.path <- "C:/Users/gmillot/Desktop" # single character string indicating the path of the output folder. Example: out.path <- "C:/Users/gmillot/Desktop"
 file.kind <- "multi" # single character string indicating kind of fasta file returned. Either "single" (each sequence in a different fasta file) or "multi" (all the sequences in a single fasta file). file.kind <- "multi"
 
@@ -103,7 +103,7 @@ if(interactive() == FALSE){ # if(grepl(x = commandArgs(trailingOnly = FALSE), pa
         "file.kind", 
         "cute", 
         "log"
-    ) # objects names exactly in the same order as in the bash code and recovered in args. Here only one, because only the path of the config file to indicate after the xlsx2fasta.R script execution
+    ) # objects names exactly in the same order as in the bash code and recovered in args. Here only one, because only the path of the config file to indicate after the table2fasta.R script execution
     if(length(args) != length(tempo.arg.names)){
         stop(paste0("\n\n================\n\nERROR IN ", script, ".R\nTHE NUMBER OF ELEMENTS IN args (", length(args),") IS DIFFERENT FROM THE NUMBER OF ELEMENTS IN tempo.arg.names (", length(tempo.arg.names),")\nargs:", paste0(args, collapse = ","), "\ntempo.arg.names:", paste0(tempo.arg.names, collapse = ","), "\n\n================\n\n"), call. = FALSE)
     }
@@ -191,7 +191,7 @@ fun_source_test <- function(path, script){ # do not write script = script: can p
     if(length(path) != 1){
         stop(paste0("\n\n============\n\nERROR IN ", script, ".R\n", name, " PARAMETER MUST BE LENGTH 1: ", paste(path, collapse = " "), "\n\n============\n\n"), call. = FALSE)
     }else if(grepl(x = path, pattern = "^http")){
-        tempo.name <- paste0("tmp_xlsx2fasta.R_", as.integer(Sys.time()))
+        tempo.name <- paste0("tmp_table2fasta.R_", as.integer(Sys.time()))
         if(file.exists(tempo.name)){
             stop(paste0("\n\n============\n\nERROR IN ", script, ".R\nTHE TEMPORARY FILE USED BY THE ", script, " SCRIPT ALREADY EXISTS:\n", file.path(tempo.name), "\n\n. PLEASE, RERUN.\n\n============\n\n"), call. = FALSE)
         }else{
@@ -356,7 +356,7 @@ if( ! dir.exists(out.path)){
 ################ Ignition
 
 
-out.path <- paste0(out.path, "/xlsx2fasta_", as.integer(ini.time))
+out.path <- paste0(out.path, "/table2fasta_", as.integer(ini.time))
 dir.create(out.path)
 fun_report(data = paste0("\n\n################################################################ ", script, " PROCESS\n\n"), output = log, path = out.path, overwrite = TRUE)
 fun_report(data = paste0("\n\n################################ RUNNING DATE AND STARTING TIME"), output = log, path = out.path, overwrite = FALSE)
@@ -375,20 +375,29 @@ fun_report(data = paste0("\n\n################################ RUNNING"), output
 
 ################ Data import
 
-if(grepl(x = path, pattern = "^http")){
-    tempo.name <- paste0("tmp_xlsx2fasta.R_", ini.time)
-    if(file.exists(tempo.name)){
-        stop(paste0("\n\n============\n\nERROR IN ", script, ".R\nTHE TEMPORARY FILE USED BY THE ", script, " SCRIPT ALREADY EXISTS:\n", file.path(tempo.name), "\n\n. PLEASE, RERUN.\n\n============\n\n"), call. = FALSE)
-    }else{
-        download.file(path, destfile = tempo.name, method="auto", quiet=TRUE)
-        path2 <- file.path(tempo.name)
-        obs <- openxlsx::read.xlsx(path, sheet = 1, colNames = TRUE)
-        if(file.exists(path2)){
-            file.remove(path2) # idem file.remove(tempo.name)
-        }
-    }
+#if(grepl(x = path, pattern = "^http")){
+#    tempo.name <- paste0("tmp_table2fasta.R_", ini.time)
+#    if(file.exists(tempo.name)){
+#        stop(paste0("\n\n============\n\nERROR IN ", script, ".R\nTHE TEMPORARY FILE USED BY THE ", script, " SCRIPT ALREADY EXISTS:\n", file.path(tempo.name), "\n\n. PLEASE, RERUN.\n\n============\n\n"), call. = FALSE)
+#    }else{
+#        download.file(path, destfile = tempo.name, method="auto", quiet=TRUE)
+#        path2 <- file.path(tempo.name)
+#        if(file.exists(path2)){
+#            file.remove(path2) # idem file.remove(tempo.name)
+#        }
+#    }
+#}
+
+if(grepl("\\.xlsx$", path)) {
+    obs <- openxlsx::read.xlsx(path, sheet = 1, colNames = TRUE) # accept http file
+}else if(grepl("\\.csv$", path)) {
+    obs <- read.table(path, header = TRUE, sep = ",") # accept http file
+}else if(grepl("\\.tsv$", path)) {
+    obs <- read.table(path, header = TRUE, sep = "\t")
+}else if(grepl("\\.txt$", path)) {
+    obs <- read.table(path, header = TRUE, sep = "\t| ")
 }else{
-    obs <- openxlsx::read.xlsx(path, sheet = 1, colNames = TRUE)
+    stop(paste0("\n\n============\n\nERROR IN ", script, ".R\nTHE path PARAMETER POINTS TO A FILE WITH WRONG EXTENSION.\n ONLY .xlsx, .csv, .tsv and .txt ARE ACCEPTED.\nPATH INDICATED:\n", path, "\n\n============\n\n"), call. = FALSE)
 }
 
 
