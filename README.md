@@ -131,6 +131,11 @@ The developers & maintainers of the mentioned softwares and packages, including:
 <br /><br />
 ## WHAT'S NEW IN
 
+### v3.1
+
+- Comments added in the user settings section.
+
+
 ### v3.0
 
 - Now accept .txt, .csv and .tsv extension, in addtion to .xlsx.
