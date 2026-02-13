@@ -69,6 +69,7 @@ path <- "https://zenodo.org/records/10844886/files/ig_sequences.xlsx" # single c
 Name <- "Name" # single character string indicating the column name of the sequence names. Example: Name <- "Name"
 Seq <- c("VH", "VL") # vector of character strings indicating the column names of the table file containing sequences. Example: Seq <- c("VH", "VL"). Example: Seq <- c("VH").
 categ <- c("Patient", "Sample") # vector of character strings indicating additional names of qualitative columns of the table file. A specific folder will be generated for each class of each of these columns, with the fasta sequence in it when non NA or empty cells are present in this column. Write "NULL" if not required. Example: categ <- c("Patient", "Sample"). Example: categ <- c("Patient")
+sep <- NULL # single character indicating the kind of separator in the input file. Either ",", ";", " " or "\t". Ignored if NULL or if path indicates a .xlsx or xls file.
 out.path <- "C:/Users/gmillot/Desktop" # single character string indicating the path of the output folder. Example: out.path <- "C:/Users/gmillot/Desktop"
 file.kind <- "multi" # single character string indicating kind of fasta file returned. Either "single" (each sequence in a different fasta file) or "multi" (all the sequences in a single fasta file). file.kind <- "multi"
 
@@ -100,6 +101,7 @@ if(interactive() == FALSE){ # if(grepl(x = commandArgs(trailingOnly = FALSE), pa
         "Seq", 
         "categ", 
         "out.path", 
+        "sep", 
         "file.kind", 
         "cute", 
         "log"
@@ -142,7 +144,8 @@ param.list <- c(
     "Name", 
     "Seq", 
     "categ", 
-    "out.path",
+    "out.path", 
+    "sep", 
     "file.kind", 
     "cute", 
     "log"
@@ -280,6 +283,10 @@ tempo <- fun_check(data = path, class = "vector", typeof = "character", length =
 tempo <- fun_check(data = Name, class = "vector", typeof = "character", length = 1) ; eval(ee)
 tempo <- fun_check(data = Seq, class = "vector", typeof = "character") ; eval(ee)
 tempo <- fun_check(data = categ, class = "vector", typeof = "character") ; eval(ee)
+if( ! is.null(sep)){
+    tempo <- fun_check(data = sep, options = c(",", ";", " ", "\t"), length = 1) ; eval(ee)
+}
+# cute already tested above
 tempo <- fun_check(data = out.path, class = "vector", typeof = "character", length = 1) ; eval(ee)
 tempo <- fun_check(data = file.kind, options = c("single", "multi"), length = 1) ; eval(ee)
 # cute already tested above
@@ -294,7 +301,8 @@ if(any(arg.check) == TRUE){ # normally no NA
 # management of NULL arguments
 tempo.arg <-c(
     "path", 
-    "out.path",
+    "out.path", 
+    # "sep", 
     "file.kind",
     "cute", 
     "log"
@@ -309,6 +317,7 @@ if(any(tempo.log) == TRUE){# normally no NA with is.null()
 tempo.arg <-c(
     "path", 
     "out.path",
+    "sep", 
     "file.kind",
     "cute", 
     "log"
@@ -388,16 +397,20 @@ fun_report(data = paste0("\n\n################################ RUNNING"), output
 #    }
 #}
 
-if(grepl("\\.xlsx$", path)) {
+if(grepl("\\.xlsx$", path) | grepl("\\.xls$", path)) {
     obs <- openxlsx::read.xlsx(path, sheet = 1, colNames = TRUE) # accept http file
-}else if(grepl("\\.csv$", path)) {
-    obs <- read.table(path, header = TRUE, sep = ",") # accept http file
-}else if(grepl("\\.tsv$", path)) {
-    obs <- read.table(path, header = TRUE, sep = "\t")
-}else if(grepl("\\.txt$", path)) {
-    obs <- read.table(path, header = TRUE, sep = "\t| ")
+}else if( ! is.null(sep)){
+     obs <- read.table(path, header = TRUE, sep = sep, comment.char = "", stringsAsFactors = FALSE, quote = "") # accept http file
 }else{
-    stop(paste0("\n\n============\n\nERROR IN ", script, ".R\nTHE path PARAMETER POINTS TO A FILE WITH WRONG EXTENSION.\n ONLY .xlsx, .csv, .tsv and .txt ARE ACCEPTED.\nPATH INDICATED:\n", path, "\n\n============\n\n"), call. = FALSE)
+    if(grepl("\\.csv$", path)) {
+        obs <- read.table(path, header = TRUE, sep = ";", comment.char = "", stringsAsFactors = FALSE, quote = "") # accept http file
+    }else if(grepl("\\.tsv$", path)) {
+        obs <- read.table(path, header = TRUE, sep = "\t", comment.char = "", stringsAsFactors = FALSE, quote = "")
+    }else if(grepl("\\.txt$", path)) {
+        obs <- read.table(path, header = TRUE, sep = "\t| ", comment.char = "", stringsAsFactors = FALSE, quote = "")
+    }else{
+        stop(paste0("\n\n============\n\nERROR IN ", script, ".R\nTHE path PARAMETER POINTS TO A FILE WITH WRONG EXTENSION.\n ONLY .xlsx, .csv, .tsv and .txt ARE ACCEPTED.\nPATH INDICATED:\n", path, "\n\n============\n\n"), call. = FALSE)
+    }
 }
 
 

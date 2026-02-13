@@ -131,6 +131,11 @@ The developers & maintainers of the mentioned softwares and packages, including:
 <br /><br />
 ## WHAT'S NEW IN
 
+### v4.0
+
+- More options regarding the input file.
+
+
 ### v3.1
 
 - Comments added in the user settings section.
